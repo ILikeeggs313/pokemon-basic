@@ -1,0 +1,18 @@
+.PokeDex {
+    text-align: center;
+  }
+  
+.PokeDex-title {
+    color: red;
+  }
+  
+.PokeDex-cards {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  
+  .PokeDex-winner {
+    font-weight: bold;
+    color: orangered;
+  }

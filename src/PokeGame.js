@@ -1,5 +1,5 @@
 import React from "react";
-import PokeDex from "./Pokedex";
+import PokeDex from "./PokeDex";
 
 const defaultPokemon = [
   { id: 4, name: "Charmander", type: "fire", base_experience: 62 },
@@ -12,12 +12,36 @@ const defaultPokemon = [
   { id: 133, name: "Eevee", type: "normal", base_experience: 65 },
 ];
 
-function PokeGame(pokemon = defaultPokemon){
-    return(
-        <div className = "PokeGame">
-            <PokeDex pokemon = {pokemon} />
+function sumExperience(hand) {
+    return hand.reduce((exp, pokemon) => exp + pokemon.base_experience, 0);
+  }
+  
+  /** Pokegame: shows two hands (pokedexes)
+   *
+   * Props:
+   * - pokemon (list of pokemon to use; defaults to default list)
+   **/
+  
+  function PokeGame({ pokemon=defaultPokemon }) {
+    const hand1 = [];
+    const hand2 = [...pokemon];
+  
+    // move random cards from hand2 until the hands have the same number of cards
+    while (hand1.length < hand2.length) {
+      const randIdx = Math.floor(Math.random() * hand2.length);
+      const randPokemon = hand2.splice(randIdx, 1)[0];
+      hand1.push(randPokemon);
+    }
+  
+    const exp1 = sumExperience(hand1);
+    const exp2 = sumExperience(hand2);
+    
+    return (
+        <div>
+          <PokeDex pokemon={hand1} exp={exp1} isWinner={exp1 > exp2} />
+          <PokeDex pokemon={hand2} exp={exp2} isWinner={exp2 > exp1 ? "yes ": null} />
         </div>
-    )
+    );
 }
 
 export default PokeGame;

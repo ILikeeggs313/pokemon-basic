@@ -1,5 +1,6 @@
 //shows a single pokemon, wiht name, image, type and base exp
 import React from "react";
+import "./PokeDex.css";
 
 const PokeCard = (props) => {
     let imgSource = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${props.id}.png`

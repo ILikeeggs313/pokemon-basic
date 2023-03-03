@@ -3,12 +3,15 @@
 import PokeCard from "./PokeCard.js";
 import React from "react";
 
-const PokeDex = (props) => {
+const PokeDex = ({exp, isWinner, pokemon}) => {
+    const WinnerMsg = isWinner ?
+    <p className = "PokeDex-winner"> this hand wins! </p>
+    : null;
     return(
         <div className = "PokeDex">
             <h2 className = "PokeDex-title"> Pokedex</h2>
             <div className = "PokeDex-cards">
-                {props.pokemon.map(p => (
+                {pokemon.map(p => (
                     <PokeCard 
                     id = {p.id}
                     name = {p.name}
@@ -17,6 +20,8 @@ const PokeDex = (props) => {
                     />
                 ))}
             </div>
+            <p> Total exp : {exp} </p>
+            {WinnerMsg}
         </div>
     )
 }
